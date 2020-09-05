@@ -1,6 +1,6 @@
 # Yaml Diff
 
-A script to export differenies between many yaml files.
+A script to export differences between many yaml files
 
 ## Build
 
