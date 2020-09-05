@@ -13,19 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.devit.util.yaml_diff;
+package cn.devit.util.yaml_diff
 
+import com.google.common.base.Charsets;
 import com.google.common.collect.Table
 import groovy.xml.MarkupBuilder
 
+import java.nio.file.Files
+
 class HtmlReport {
   public static void htmlTable(Table tableData, List<String> columns, File file) {
-    MarkupBuilder b = new MarkupBuilder(new FileWriter(file));
+    MarkupBuilder b = new MarkupBuilder(Files.newBufferedWriter(file.toPath(), Charsets.UTF_8));
     String html = b.html(lang: 'zh-CN') {
       head() {
         link(rel: 'stylesheet',
             href: 'https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css'
         )
+        meta(content:'text/html; charset=utf-8',
+            'http-equiv':"content-type")
       }
       body {
         h1("YAML比较工具")

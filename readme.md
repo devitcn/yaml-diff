@@ -2,10 +2,13 @@
 
 A script to export differenies between many yaml files.
 
+## Build
 
+    mvn package
 
-## Example
+## To Use
 
+### By Code
     @Test
     public void shoult_show_1_different() {
       List<String> files = Arrays.asList("application.yml", "application-sit.yml", "application-uat.yml");
@@ -21,6 +24,10 @@ A script to export differenies between many yaml files.
   
       HtmlReport.htmlTable(table.getTable(), table.getColumns(), new File("report.html"));
     }  
+
+### By UI
+
+    mvn -X javafx:run
     
 ## License
 

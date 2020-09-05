@@ -8,6 +8,9 @@
   <properties>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
+    <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <start-class>cn.devit.util.yaml_diff.Main</start-class>
   </properties>
   <dependencies>
     <dependency>
@@ -42,57 +45,79 @@
       <artifactId>guava</artifactId>
       <version>28.0-jre</version>
     </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
+      <version>14</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-web</artifactId>
+      <version>14</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-fxml</artifactId>
+      <version>14</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.6.2</version>
+        <groupId>org.codehaus.gmavenplus</groupId>
+        <artifactId>gmavenplus-plugin</artifactId>
+        <version>1.6.2</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>addSources</goal>
+              <goal>addTestSources</goal>
+              <goal>generateStubs</goal>
+              <goal>compile</goal>
+              <goal>generateTestStubs</goal>
+              <goal>compileTests</goal>
+              <goal>removeStubs</goal>
+              <goal>removeTestStubs</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>0.0.4</version>
         <configuration>
-          <compilerId>groovy-eclipse-compiler</compilerId>
+          <mainClass>${start-class}</mainClass>
         </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-eclipse-compiler</artifactId>
-            <version>3.6.0-03</version>
-          </dependency>
-          <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-eclipse-batch</artifactId>
-            <version>3.0.2-02</version>
-          </dependency>
-        </dependencies>
       </plugin>
       <plugin>
         <groupId>com.mycila</groupId>
         <artifactId>license-maven-plugin</artifactId>
         <version>4.0.rc2</version>
         <configuration>
-            <licenseSets>
-                <licenseSet>
-                    <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
-                    <excludes>
-                        <exclude>readme.md</exclude>
-                        <exclude>src/test/resources/**</exclude>
-                        <exclude>pom.xml</exclude>
-                    </excludes>
-                </licenseSet>
-            </licenseSets>
-            <properties>
-                <owner>lxb</owner>
-                <email>lxbzmy@gmail.com</email>
-            </properties>
+          <licenseSets>
+            <licenseSet>
+              <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+              <excludes>
+                <exclude>readme.md</exclude>
+                <exclude>src/test/resources/**</exclude>
+                <exclude>pom.xml</exclude>
+              </excludes>
+            </licenseSet>
+          </licenseSets>
+          <properties>
+            <owner>lxb</owner>
+            <email>lxbzmy@gmail.com</email>
+          </properties>
         </configuration>
         <executions>
-            <execution>
-                <goals>
-                    <goal>check</goal>
-                </goals>
-            </execution>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
         </executions>
-    </plugin>
+      </plugin>
     </plugins>
   </build>
   <inceptionYear>2020</inceptionYear>

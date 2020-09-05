@@ -30,7 +30,11 @@ class YamlDiff {
   public DiffData diff(List<File> files) {
     Map<FileName, Properties> data = [:]
     files.each { it ->
-      data.put(FileName.parser(it), read(it));
+      try{
+        data.put(FileName.parser(it), read(it));
+      }catch(RuntimeException e){
+        e.printStackTrace();
+      }
     }
     HashBasedTable table = HashBasedTable.<String, String, String> create();
     final int length = data.size();
@@ -43,7 +47,7 @@ class YamlDiff {
           //已经放了
         } else {
           data.each { FileName kk, Properties pp ->
-            table.put(key, kk.key(), pp.get(key));
+            table.put(key, kk.key(), (pp.get(key)?:"") as String);
           }
         }
       }
